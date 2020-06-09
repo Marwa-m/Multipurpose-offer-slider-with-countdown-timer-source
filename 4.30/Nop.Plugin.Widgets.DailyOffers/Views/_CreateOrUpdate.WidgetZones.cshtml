@@ -1,0 +1,76 @@
+﻿@model OfferModel
+@inject AdminAreaSettings adminAreaSettings
+    @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_offer_details_widgetzones_top", additionalData = Model.Id })
+    @if (Model.Id > 0)
+    {
+<div class="panel-body">
+    @await Html.PartialAsync("Table", new DataTablesModel
+    {
+        Name = "widgetzones-grid",
+        UrlRead = new DataUrl("WidgetZoneList", "Offer", new RouteValueDictionary { [nameof(Model.OfferProductSearchModel.OfferId)] = Model.OfferProductSearchModel.OfferId }),
+        UrlDelete = new DataUrl("WidgetZoneDelete", "Offer", null),
+        UrlUpdate = new DataUrl("WidgetZoneUpdate", "Offer", null),
+        Length = Model.OfferProductSearchModel.PageSize,
+        LengthMenu = Model.OfferProductSearchModel.AvailablePageSizes,
+        ColumnCollection = new List<ColumnProperty>
+{
+new ColumnProperty(nameof(OfferWidgetZoneModel.WidgetZone))
+{
+Title = T("Plugins.Widgets.DailyOffers.WidgetZone.Fields.WidgetZone").Text
+},
+new ColumnProperty(nameof(OfferProductModel.DisplayOrder))
+{
+Title = T("Plugins.Widgets.DailyOffers.WidgetZone.Fields.DisplayOrder").Text,
+Width = "150",
+ClassName = NopColumnClassDefaults.CenterAll,
+Editable = true,
+EditType = EditType.Number
+},
+new ColumnProperty(nameof(OfferProductModel.Id))
+{
+Title = T("Admin.Common.Edit").Text,
+Width = "200",
+ClassName =  NopColumnClassDefaults.Button,
+Render = new RenderButtonsInlineEdit()
+},
+new ColumnProperty(nameof(OfferProductModel.Id))
+{
+Title = T("Admin.Common.Delete").Text,
+Width = "100",
+Render = new RenderButtonRemove(T("Admin.Common.Delete").Text),
+ClassName = NopColumnClassDefaults.Button
+}
+}
+    })
+
+</div>
+
+            <div class="panel-footer">
+                <button type="submit" id="btnAddNewWidgetZone"
+                        onclick="javascript:OpenWindow('@(Url.Action("WidgetZoneAddPopup", "Offer", new {offerId = Model.Id, btnId = "btnRefreshWidgetZones", formId = "offer-form"}))', 800, 800, true); return false;"
+                        class="btn btn-primary">
+                    @T("Plugins.Widgets.DailyOffers.WidgetZone.AddNew")
+                </button>
+                <input type="submit" id="btnRefreshWidgetZones" style="display: none" />
+                <script>
+                    $(document).ready(function () {
+                        $('#btnRefreshWidgetZones').click(function () {
+                            //refresh grid
+                            updateTable('#widgetzones-grid');
+
+                            //return false to don't reload a page
+                            return false;
+                        });
+                    });
+                </script>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @T("Plugins.Widgets.DailyOffers.WidgetZone.SaveBeforeEdit")
+            </div>
+        </div>
+    }
+    @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_offer_details_widgetzones_bottom", additionalData = Model.Id })

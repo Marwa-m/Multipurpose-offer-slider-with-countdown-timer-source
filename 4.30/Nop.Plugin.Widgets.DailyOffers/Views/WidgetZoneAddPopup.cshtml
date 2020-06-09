@@ -1,0 +1,61 @@
+﻿@model OfferModel.AddOfferWidgetZoneModel
+@inject AdminAreaSettings adminAreaSettings
+
+@{
+    Layout = "_AdminPopupLayout";
+
+    //page title
+    ViewBag.Title = T("Plugins.Widgets.DailyOffers.WidgetZone.AddNew").Text;
+}
+@if (ViewBag.RefreshPage == true)
+{
+<script type="text/javascript">
+        try {
+            window.opener.document.getElementById('@(Context.Request.Query["btnId"])').click();
+        }
+        catch (e) { }
+        window.close();
+</script>
+}
+<form asp-controller="Offer" asp-action="WidgetZoneAddPopup"
+      asp-route-offerId="@Context.Request.Query["offerId"]"
+      asp-route-btnId="@Context.Request.Query["btnId"]"
+      asp-route-formId="@Context.Request.Query["formId"]">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Plugins.Widgets.DailyOffers.WidgetZone.AddNew")
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+    <div asp-validation-summary="All"></div>
+            <div class="panel-group">
+                <div class="panel panel-default panel-popup">
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="WidgetZone" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-select asp-for="WidgetZone" asp-items="Model.AvailableWidgetZones" />
+                                <span asp-validation-for="WidgetZone"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DisplayOrder" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DisplayOrder" />
+                                <span asp-validation-for="DisplayOrder"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</form>

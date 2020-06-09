@@ -1,0 +1,158 @@
+﻿@using Nop.Core
+@using Nop.Web.Framework.UI
+@using System.Globalization
+@inject IWorkContext workContext
+
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+
+}
+<!-- Testimonials Advanced -->
+@model IEnumerable<OfferPresentationModel>
+@{
+    if (supportRtl)
+    {
+        Html.AppendCssFileParts(ResourceLocation.Head, "~/Plugins/Widgets.DailyOffers/Content/css/Daily-offers.rtl.css");
+    }
+    else
+    {
+        Html.AppendCssFileParts(ResourceLocation.Head, "~/Plugins/Widgets.DailyOffers/Content/css/Daily-offers.css");
+    }
+
+
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.DailyOffers/Content/slick/hs.carousel.js");
+    Html.AppendScriptParts(ResourceLocation.Head, "~/Plugins/Widgets.DailyOffers/Content/slick/hs.core.js");
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.DailyOffers/Content/countdown/hs.countdown.js");
+
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.DailyOffers/Content/slick/slick.js");
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.DailyOffers/Content/countdown/jquery.countdown.min.js");
+
+    Html.AppendInlineScriptParts(ResourceLocation.Footer, @"<script>
+                              $(document).on('ready', function () {
+                                  // initialization of carousel
+                                  $.HSCore.components.HSCarousel.init('.js-carousel');
+
+                                 // $('.js-carousel').slick();
+// initialization of countdowns
+var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+yearsElSelector: '.js-cd-years',
+monthElSelector: '.js-cd-month',
+daysElSelector: '.js-cd-days',
+hoursElSelector: '.js-cd-hours',
+minutesElSelector: '.js-cd-minutes',
+secondsElSelector: '.js-cd-seconds'
+});
+                              });
+</script>");
+    int counter = 0;
+    int sliderCounter = 0;
+
+}
+@foreach (var offer in Model)
+{
+    if (!string.IsNullOrEmpty(offer.CustomStyle))
+    {
+        <style>
+      @Html.Raw(offer.CustomStyle)
+        </style>
+
+    }
+    sliderCounter++;
+    if (offer.ShowName)
+    {
+        <h2 id="DTitle-@sliderCounter" class="DTitle text-center g-color-black mb-4">@offer.Name</h2>
+    }
+        <div id="DCarousel-@sliderCounter" class="js-carousel" data-slick='{"autoplay": @offer.AutoPlay.ToString().ToLower(), "autoplaySpeed": @offer.AutoPlaySpeed,"pauseOnHover":@offer.PauseOnHover.ToString().ToLower(),"infinite":true,"rtl":@workContext.WorkingLanguage.Rtl.ToString().ToLower()}' data-arrows-classes="@offer.ButtonClasses"
+             data-arrow-left-classes="@(workContext.WorkingLanguage.Rtl==true?"fa fa-angle-left g-right-0":"fa fa-angle-left g-left-0")" data-arrow-right-classes="@(workContext.WorkingLanguage.Rtl==true?"fa fa-angle-right g-left-0":"fa fa-angle-right g-right-0")">
+
+            @foreach (var product in offer.productPresentationModels)
+    {
+        counter += 1;
+        <div id="Djs-slide-@sliderCounter-@counter" class="Djs-slide js-slide">
+            <!-- Promo Block -->
+            <section id="DSection-@sliderCounter-@counter" class="DSection g-bg-secondary g-pos-rel">
+                <div id="DContainer-@sliderCounter-@counter" class="DContainer container ">
+                    <div id="DContent-@sliderCounter-@counter" class="DContent row justify-content-between align-items-center">
+                        <div id="Dorder-@sliderCounter-@counter" class="Dorder col-md-6 col-lg-6 order-md-2 g-mb-30">
+                            <div id="DPos-@sliderCounter-@counter" class="DPos g-pos-rel">
+                                <img id="DImg-@sliderCounter-@counter" class="DImg img-fluid w-100" alt="@product.DefaultPictureModel.AlternateText" src="@product.DefaultPictureModel.ImageUrl" title="@product.DefaultPictureModel.Title">
+                                @{
+                            string classTransform = "";
+                                }
+                                @if (product.OldPriceValue != 0 || product.PriceBeforDiscountValue != product.ProductPrice.PriceValue)
+                        {
+
+                            classTransform = "transform:translateY(-100%)";
+                        }
+                                <span id="DSpanCirclePrice-@counter" class="DSpanCirclePrice u-icon-v1 g-width-125 g-height-125 g-brd-3 g-brd-white g-color-white g-bg-primary g-font-weight-300 g-font-size-18 rounded-circle g-pos-abs g-top-100 g-left-0 g-brd-around">
+                                    <i id="DIPrice-@sliderCounter-@counter" style="@(classTransform!=""?classTransform:"")" class="g-font-style-normal">
+                                        @product.ProductPrice.Price
+                                    </i>
+                                    @if (product.OldPriceValue != 0)
+                            {
+                                <i id="DIOldPrice-@sliderCounter-@counter" style="@(classTransform!=""?classTransform:"")" class="offer-old-price">@product.ProductPrice.OldPrice</i>
+                    }
+                                    @if (product.PriceBeforDiscountValue != product.ProductPrice.PriceValue)
+                            {
+                                <i id="DIPriceBeforeDiscount" style="@(classTransform!=""?classTransform:"")" class="offer-old-price2">@product.PriceBeforDiscount</i>
+                    }
+                                </span>
+
+                            </div>
+                        </div>
+                        <div id="DDetails-@sliderCounter-@counter" class="DDetails col-md-6 order-md-1 g-mb-30">
+                            <div id="DdivDetails-@sliderCounter-@counter" class="DdivDetails g-mb-30 padding-20">
+                                <h1 id="DCategoryName-@sliderCounter-@counter" class="DCategoryName g-color-primary g-font-weight-400 g-font-size-40 mb-0">@product.Category.Name</h1>
+                                <h2 id="DProductName-@sliderCounter-@counter" class="DProductName g-line-height-2 mb-4">@product.Name</h2>
+                                <p id="DShortDesc-@sliderCounter-@counter" class="DShortDesc g-line-height-1-5">@product.ShortDescription</p>
+                            </div>
+                            <div class="text-center g-mb-30">
+                                <a id="DBtnShop-@sliderCounter-@counter" class="DBtnShop btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25 " href="@Url.RouteUrl("Product", new { SeName = product.SeName })">@T("Plugins.Widgets.DailyOffers.ShopNow")</a>
+
+                            </div>
+                            <!-- Countdown -->
+                            @if (product.PriceBeforDiscountValue != product.ProductPrice.PriceValue && product.EndDateDiscount != null && product.EndDateDiscount != DateTime.MaxValue)
+                    {
+                        <div class="text-center">
+
+                            <div id="DCountDContainer-@sliderCounter-@counter" class="DCountDContainer text-uppercase">
+                                <div id="DCountDown-@sliderCounter-@counter" class="js-countdown u-countdown-v3 g-line-height-1_3 g-color-black"
+                                     data-end-date="@product.EndDateDiscount.Value.ToString("MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture)"
+                                     data-month-format="%m"
+                                     data-days-format="%D"
+                                     data-hours-format="%H"
+                                     data-minutes-format="%M"
+                                     data-seconds-format="%S">
+
+                                    <div id="DDaysContainer-@sliderCounter-@counter" class="DDaysContainer d-inline-block g-min-width-10 rounded g-bg-opacity g-py-5 g-px-16 g-mx-1 g-mb-30">
+                                        <div id="DDaysBox-@sliderCounter-@counter" class="DDaysBox js-cd-days g-color-lightred g-font-weight-500 g-font-size-40"></div>
+                                        <span id="DDaysName-@sliderCounter-@counter" class="DDaysName g-color-gray-dark-v4 g-font-size-11">@T("Plugins.Widgets.DailyOffers.Days")</span>
+                                    </div>
+                                    <div id="DHoursContainer-@sliderCounter-@counter" class="DHoursContainer d-inline-block g-min-width-10 rounded g-bg-opacity g-py-5 g-px-16 g-mx-1 g-mb-30">
+                                        <div id="DHoursBox-@sliderCounter-@counter" class="DHoursBox js-cd-hours g-color-lightred g-font-weight-500 g-font-size-40"></div>
+                                        <span id="DHoursName-@sliderCounter-@counter" class="DHoursName g-color-gray-dark-v4 g-font-size-11">@T("Plugins.Widgets.DailyOffers.Hours")</span>
+                                    </div>
+                                    <div id="DMinutesContainer-@sliderCounter-@counter" class="DMinutesContainer d-inline-block g-min-width-10 rounded g-bg-opacity g-py-5 g-px-16 g-mx-1 g-mb-30">
+                                        <div id="DMinutesBox-@sliderCounter-@counter" class="DMinutesBox js-cd-minutes g-color-lightred g-font-weight-500 g-font-size-40"></div>
+                                        <span id="DMinutesName-@sliderCounter-@counter" class="DMinutesName g-color-gray-dark-v4 g-font-size-11">@T("Plugins.Widgets.DailyOffers.Minutes")</span>
+                                    </div>
+                                    <div id="DSecondsContainer-@sliderCounter-@counter" class="DSecondsContainer d-inline-block g-min-width-10 rounded g-bg-opacity g-py-5 g-px-16 g-mx-1 g-mb-30">
+                                        <div id="DSecondsBox-@sliderCounter-@counter" class="js-cd-seconds g-color-lightred g-font-weight-500 g-font-size-40"></div>
+                                        <span id="DSecondsName-@sliderCounter-@counter" class="DSecondsName g-color-gray-dark-v4 g-font-size-11">@T("Plugins.Widgets.DailyOffers.Seconds")</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            }
+
+                            <!-- End Countdown -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Promo Block -->
+        </div>
+}
+        </div>}
+
+<!-- End Testimonials Advanced -->

@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "Daily Offers",
+  "SystemName": "Widgets.DailyOffers",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.20" ],
+  "Author": "Developer Marwa marwa.almahmoud@hotmail.com",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.DailyOffers.dll",
+  "Description": "This plugin allows you to make daily offers"
+}

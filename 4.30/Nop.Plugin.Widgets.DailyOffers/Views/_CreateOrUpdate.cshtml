@@ -1,0 +1,31 @@
+﻿@model OfferModel
+@inject IEventPublisher eventPublisher
+
+<div asp-validation-summary="All"></div>
+<input asp-for="Id" type="hidden"/>
+
+<div class="content">
+    <div class="form-horizontal">
+        
+        <nop-tabs id="offer-edit">
+            <nop-tab asp-name="tab-info" asp-title="@T("Plugins.Widgets.DailyOffers.Offer.Info")" asp-default="true">@await Html.PartialAsync("~/Plugins/Widgets.DailyOffers/Views/_CreateOrUpdate.Info.cshtml", Model)</nop-tab>
+            <nop-tab asp-name="tab-widgetzones" asp-title="@T("Plugins.Widgets.DailyOffers.Offer.WidgetZones")">@await Html.PartialAsync("~/Plugins/Widgets.DailyOffers/Views/_CreateOrUpdate.WidgetZones.cshtml", Model)</nop-tab>
+            <nop-tab asp-name="tab-urlrecords" asp-title="@T("Plugins.Widgets.DailyOffers.Offer.UrlRecords")">@await Html.PartialAsync("~/Plugins/Widgets.DailyOffers/Views/_CreateOrUpdate.UrlRecords.cshtml", Model)</nop-tab>
+            <nop-tab asp-name="tab-products" asp-title="@T("Plugins.Widgets.DailyOffers.Offer.Products")">@await Html.PartialAsync("~/Plugins/Widgets.DailyOffers/Views/_CreateOrUpdate.Products.cshtml", Model)</nop-tab>
+            <nop-tab asp-name="tab-schedule" asp-title="@T("Plugins.Widgets.DailyOffers.Offer.Scheduling")">@await Html.PartialAsync("~/Plugins/Widgets.DailyOffers/Views/_CreateOrUpdate.Scheduling.cshtml", Model)</nop-tab>
+            <nop-tab asp-name="tab-style" asp-title="@T("Plugins.Widgets.DailyOffers.Offer.CustomStyle")">@await Html.PartialAsync("~/Plugins/Widgets.DailyOffers/Views/_CreateOrUpdate.CustomStyle.cshtml", Model)</nop-tab>
+            <nop-tab asp-name="tab-SliderSettings" asp-title="@T("Plugins.Widgets.DailyOffers.Offer.SliderSettings")">@await Html.PartialAsync("~/Plugins/Widgets.DailyOffers/Views/_CreateOrUpdate.SliderSettings.cshtml", Model)</nop-tab>
+
+        </nop-tabs>
+    </div>
+</div>
+
+@{
+    //custom tabs
+    var eventMessage = new AdminTabStripCreated(this.Html, "offer-edit");
+    eventPublisher.Publish(eventMessage);
+    foreach (var eventBlock in eventMessage.BlocksToRender)
+    {
+        @eventBlock
+    }
+}

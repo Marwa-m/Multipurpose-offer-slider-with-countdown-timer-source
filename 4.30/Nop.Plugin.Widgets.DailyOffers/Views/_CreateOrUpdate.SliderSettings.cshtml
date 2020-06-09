@@ -1,0 +1,184 @@
+﻿@model OfferModel
+@{
+    Html.AddScriptParts("~/lib/farbtastic/farbtastic.js");
+    Html.AddCssFileParts("~/lib/farbtastic/farbtastic.css");
+}
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="@Model.HideOnMobile" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="@Model.HideOnMobile" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="@Model.HideSeconds" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="@Model.HideSeconds" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="AutoPlay" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="AutoPlay" />
+                    <span asp-validation-for="AutoPlaySpeed"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="AutoPlaySpeed" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="AutoPlaySpeed" />
+                    <span asp-validation-for="AutoPlaySpeed"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="PauseOnHover" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="PauseOnHover" />
+                    <span asp-validation-for="PauseOnHover"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="ButtonClasses" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="ButtonClasses" />
+                    <span asp-validation-for="ButtonClasses"></span>
+                </div>
+            </div>
+
+            @if (string.IsNullOrEmpty(Model.PrimaryColor))
+            {
+                Model.PrimaryColor = "#3bb18f";
+            }
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <nop-label asp-for="PrimaryColor" />
+                </div>
+                <div class="col-sm-9">
+                    <nop-editor asp-for="PrimaryColor" />
+                    <div id="PrimaryColorPicker"></div>
+                    <script>
+                                    $(document).ready(function(){
+                                        $('#PrimaryColorPicker').farbtastic('#@Html.IdFor(model => model.PrimaryColor)');
+                                    });
+                    </script>
+                    <span asp-validation-for="PrimaryColor"></span>
+                </div>
+            </div>
+
+            @if (string.IsNullOrEmpty(Model.BackgroundColor))
+            {
+                Model.BackgroundColor = "#c4d1ff33";
+            }
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <nop-label asp-for="@Model.BackgroundColor" />
+                </div>
+                <div class="col-sm-9">
+                    <nop-editor asp-for="@Model.BackgroundColor" />
+                    <div id="BackgroundColorPicker"></div>
+                    <script>
+                                    $(document).ready(function(){
+                                        $('#BackgroundColorPicker').farbtastic('#@Html.IdFor(model => model.BackgroundColor)');
+                                    });
+                    </script>
+                    <span asp-validation-for="@Model.BackgroundColor"></span>
+                </div>
+            </div>
+
+            @if (string.IsNullOrEmpty(Model.PriceButtonBorderColor))
+            {
+                Model.PriceButtonBorderColor = "#fff";
+            }
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <nop-label asp-for="@Model.PriceButtonBorderColor" />
+                </div>
+                <div class="col-sm-9">
+                    <nop-editor asp-for="@Model.PriceButtonBorderColor" />
+                    <div id="PriceButtonBorderColorPicker"></div>
+                    <script>
+                                    $(document).ready(function(){
+                                        $('#PriceButtonBorderColorPicker').farbtastic('#@Html.IdFor(model => model.PriceButtonBorderColor)');
+                                    });
+                    </script>
+                    <span asp-validation-for="@Model.PriceButtonBorderColor"></span>
+                </div>
+            </div>
+
+            @if (string.IsNullOrEmpty(Model.BackgroundNumberBox))
+            {
+                Model.BackgroundNumberBox = "#a5c6bc80";
+            }
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <nop-label asp-for="@Model.BackgroundNumberBox" />
+                </div>
+                <div class="col-sm-9">
+                    <nop-editor asp-for="@Model.BackgroundNumberBox" />
+                    <div id="BackgroundNumberBoxColorPicker"></div>
+                    <script>
+                                    $(document).ready(function(){
+                                        $('#BackgroundNumberBoxColorPicker').farbtastic('#@Html.IdFor(model => model.BackgroundNumberBox)');
+                                    });
+                    </script>
+                    <span asp-validation-for="@Model.BackgroundNumberBox"></span>
+                </div>
+            </div>
+
+            @if (string.IsNullOrEmpty(Model.CounterWordsOldPriceColor))
+            {
+                Model.CounterWordsOldPriceColor = "#777";
+            }
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <nop-label asp-for="@Model.CounterWordsOldPriceColor" />
+                </div>
+                <div class="col-sm-9">
+                    <nop-editor asp-for="@Model.CounterWordsOldPriceColor" />
+                    <div id="CounterWordsOldPriceColorPicker"></div>
+                    <script>
+                                    $(document).ready(function(){
+                                        $('#CounterWordsOldPriceColorPicker').farbtastic('#@Html.IdFor(model => model.CounterWordsOldPriceColor)');
+                                    });
+                    </script>
+                    <span asp-validation-for="@Model.CounterWordsOldPriceColor"></span>
+                </div>
+            </div>
+
+            @if (string.IsNullOrEmpty(Model.CounterNumbersColor))
+            {
+                Model.CounterNumbersColor = "#e64b3b";
+            }
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <nop-label asp-for="@Model.CounterNumbersColor" />
+                </div>
+                <div class="col-sm-9">
+                    <nop-editor asp-for="@Model.CounterNumbersColor" />
+                    <div id="CounterNumbersColorPicker"></div>
+                    <script>
+                                    $(document).ready(function(){
+                                        $('#CounterNumbersColorPicker').farbtastic('#@Html.IdFor(model => model.CounterNumbersColor)');
+                                    });
+                    </script>
+                    <span asp-validation-for="@Model.CounterNumbersColor"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

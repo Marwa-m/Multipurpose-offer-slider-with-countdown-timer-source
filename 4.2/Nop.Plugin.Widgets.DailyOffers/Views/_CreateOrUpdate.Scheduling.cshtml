@@ -1,0 +1,81 @@
+﻿@model OfferModel
+@using Nop.Services;
+@{ 
+    const string datePickerFormat = "mm/dd/yy";
+
+}
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @T("Plugins.Widgets.DailyOffers.Offer.Schedule")
+        </div>
+        <div class="panel-body">
+            <div class="form-group ">
+                <div class="col-md-3">
+                    <nop-label asp-for="FromDate" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="FromDate" />
+                    
+                    <span asp-validation-for="FromDate"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="ToDate" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="ToDate" />
+                    <span asp-validation-for="ToDate"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @T("Plugins.Widgets.DailyOffers.Offer.SchedulePattern")
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="SchedulePatternId" />
+                </div>
+                <div class="col-md-9">
+                    <nop-select asp-for="SchedulePatternId" asp-items="@(((SchedulePattern)Model.SchedulePatternId).ToSelectList())" />
+                    <span asp-validation-for="SchedulePatternId"></span>
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="col-md-3">
+                    <nop-label asp-for="FromTimeUtc" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="FromTimeUtc" />
+                    <span asp-validation-for="FromTimeUtc"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="ToTimeUtc" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="ToTimeUtc" />
+                    <span asp-validation-for="ToTimeUtc"></span>
+                </div>
+            </div>
+
+        </div>
+        </div>
+        </div>
+<script type="text/javascript">
+     $(document).ready(function () {
+         $('#@Html.IdFor(model => model.FromTimeUtc)').kendoTimePicker({
+             format: "HH:mm",
+             value: "@(Model.FromTimeUtc > TimeSpan.MinValue || Model.FromTimeUtc.HasValue ? Model.FromTimeUtc : TimeSpan.Zero)"
+         });
+         $('#@Html.IdFor(model => model.ToTimeUtc)').kendoTimePicker({
+             format: "HH:mm",
+             value: "@(Model.ToTimeUtc > TimeSpan.MinValue || Model.ToTimeUtc.HasValue ? Model.ToTimeUtc : new TimeSpan(23,59,59))"
+         });
+    });
+</script>

@@ -1,0 +1,87 @@
+﻿:root {
+    --primary-color: #3bb18f;
+    --background-color: #c4d1ff33;
+    --priceButtonBorderColor: #fff;
+    --counterBoxBackground: #a5c6bc80;
+    --counterWordsOldPriceColor: #777;
+    --counterNumbersColor: #e64b3b;
+}
+.js-carousel .g-bg-primary ::-moz-selection {
+    color: var(--primary-color);
+}
+.js-carousel .g-bg-primary ::selection {
+    color: var(--primary-color);
+}
+.js-carousel .g-color-primary:focus {
+    color: var(--primary-color);
+}
+.js-carousel .g-color-primary {
+    color: var(--primary-color) ;
+}
+.g-color-gray-dark-v5 {
+    color: var(--primary-color);
+}
+.g-bg-primary {
+    background-color: var(--primary-color);
+}
+.g-bg-primary--hover:hover {
+    background-color: var(--primary-color);
+}
+.g-brd-primary--hover:hover {
+    background-color: var(--primary-color) ;
+}
+
+
+.js-carousel .u-btn-primary {
+    color: var(--priceButtonBorderColor);
+    background-color: var(--primary-color);
+}
+   
+
+
+.js-carousel .g-bg-secondary {
+    background-color:  var(--background-color);
+}
+
+
+
+.g-bg-opacity {
+    background-color: var(--counterBoxBackground);
+}
+
+.g-brd-around {
+    border: solid 2px var(--priceButtonBorderColor);
+}
+.g-color-black {
+    color: #000;
+}
+
+.g-color-white {
+    color: var(--priceButtonBorderColor) ;
+}
+
+.g-color-white--hover:hover {
+    color: var(--priceButtonBorderColor) !important;
+}
+.g-color-gray-dark-v4 {
+    color: var(--counterWordsOldPriceColor);
+}
+
+
+
+.g-color-lightred {
+    color: var(--counterNumbersColor);
+}
+.offer-old-price {
+    margin: 0 5px 0 0;
+    font-size: 16px;
+    color: var(--counterWordsOldPriceColor);
+    text-decoration: line-through;
+}
+
+.offer-old-price2 {
+    margin: 0 5px 0 0;
+    font-size: 12px;
+    color: var(--counterWordsOldPriceColor);
+    text-decoration: line-through;
+}

@@ -1,0 +1,81 @@
+﻿@model OfferModel
+@inject AdminAreaSettings adminAreaSettings
+    @if (Model.Id > 0)
+    {
+<div class="panel-body">
+    @await Html.PartialAsync("Table", new DataTablesModel
+{
+    Name = "urlrecords-grid",
+    UrlRead = new DataUrl("UrlRecordList", "Offer", new RouteValueDictionary { [nameof(Model.OfferProductSearchModel.OfferId)] = Model.OfferProductSearchModel.OfferId }),
+    UrlDelete = new DataUrl("UrlRecordDelete", "Offer", null),
+    Length = Model.OfferProductSearchModel.PageSize,
+    LengthMenu = Model.OfferProductSearchModel.AvailablePageSizes,
+    ColumnCollection = new List<ColumnProperty>
+{
+new ColumnProperty(nameof(OfferModel.OfferUrlRecordModel.Id))
+{
+Title = T("Admin.System.SeNames.Id").Text
+},
+            new ColumnProperty(nameof(OfferModel.OfferUrlRecordModel.UrlRecordName))
+            {
+                Title = T("Admin.System.SeNames.Name").Text
+            },
+
+            new ColumnProperty(nameof(OfferModel.OfferUrlRecordModel.EntityName))
+            {
+                Title = T("Admin.System.SeNames.EntityName").Text,
+                Width = "100"
+            },
+            new ColumnProperty(nameof(OfferModel.OfferUrlRecordModel.IsActive))
+            {
+                Title = T("Admin.System.SeNames.IsActive").Text,
+                Width = "80",
+                ClassName = NopColumnClassDefaults.CenterAll,
+                Render = new RenderBoolean()
+            },
+            new ColumnProperty(nameof(OfferModel.OfferUrlRecordModel.Language))
+            {
+                Title = T("Admin.System.SeNames.Language").Text,
+                Width = "100"
+            },
+
+new ColumnProperty(nameof(OfferModel.OfferUrlRecordModel.Id))
+{
+Title = T("Admin.Common.Delete").Text,
+Width = "100",
+Render = new RenderButtonRemove(T("Admin.Common.Delete").Text),
+ClassName = NopColumnClassDefaults.Button
+}
+}
+})
+
+</div>
+
+            <div class="panel-footer">
+                <button type="submit" id="btnAddNewUrlRecord"
+                        onclick="javascript:OpenWindow('@(Url.Action("UrlRecordAddPopup", "Offer", new {offerId = Model.Id, btnId = "btnRefreshUrlRecords", formId = "offer-form"}))', 800, 800, true); return false;"
+                        class="btn btn-primary">
+                    @T("Plugins.Widgets.DailyOffers.UrlRecord.AddNew")
+                </button>
+                <input type="submit" id="btnRefreshUrlRecords" style="display: none" />
+                <script>
+                    $(document).ready(function () {
+                        $('#btnRefreshUrlRecords').click(function () {
+                            //refresh grid
+                            updateTable('#urlrecords-grid');
+
+                            //return false to don't reload a page
+                            return false;
+                        });
+                    });
+                </script>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @T("Plugins.Widgets.DailyOffers.SaveBeforeEdit")
+            </div>
+        </div>
+    }

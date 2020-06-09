@@ -1,0 +1,191 @@
+﻿@using Nop.Core
+@using Nop.Web.Framework.UI
+@using System.Globalization
+@using Nop.Core.Domain.Catalog
+@inject IWorkContext workContext
+
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+
+}
+<!-- Testimonials Advanced -->
+@model IEnumerable<OfferPresentationModel>
+@{
+    if (supportRtl)
+    {
+        Html.AppendCssFileParts(ResourceLocation.Head, "~/Plugins/Widgets.DailyOffers/Content/css/Daily-offers.rtl.css");
+    }
+    else
+    {
+        Html.AppendCssFileParts(ResourceLocation.Head, "~/Plugins/Widgets.DailyOffers/Content/css/Daily-offers.css");
+    }
+
+    Html.AppendCssFileParts(ResourceLocation.Head, "~/Plugins/Widgets.DailyOffers/Content/css/colors.css");
+
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.DailyOffers/Content/slick/hs.carousel.js");
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.DailyOffers/Content/countdown/hs.countdown.js");
+
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.DailyOffers/Content/slick/slick.js");
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.DailyOffers/Content/countdown/jquery.countdown.min.js");
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.DailyOffers/Content/slick/hs.core.js");
+
+
+    int counter = 0;
+    Random rnd = new Random();
+}
+@foreach (var offer in Model)
+{
+
+    string randomNumber = "-" + rnd.Next(10000);
+    string randomId = "offerslider-" + offer.Id + "-" + rnd.Next(10000);
+    string SecondString = "secondsElSelector: '.js-cd-seconds'";
+    //if (!offer.HideSeconds)
+    //{
+    //    SecondString = "secondsElSelector: '.js-cd-seconds'";
+    //}
+
+    string carouselName = "dailyOffer-" + randomId;
+    Html.AppendInlineScriptParts(ResourceLocation.Footer, @"<script>
+                          $(document).on('ready', function () {
+                              // initialization of carousel
+                              $.HSCore.components.HSCarousel.init('#"+ carouselName+ @"');
+
+                             // $('#" + carouselName + @"').slick();
+// initialization of countdowns
+var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+yearsElSelector: '.js-cd-years',
+monthElSelector: '.js-cd-month',
+daysElSelector: '.js-cd-days',
+hoursElSelector: '.js-cd-hours',
+minutesElSelector: '.js-cd-minutes'," + SecondString + @"
+}); });
+</script>");
+    if(offer.HideOnMobile)
+    {
+        Html.AddHeadCustomParts("<style>@media (max-width:767px) { #" +carouselName  + "Container {display:none !important;}}</style>");
+    }
+    if (!string.IsNullOrEmpty(offer.CustomStyle))
+    {
+        Html.AddHeadCustomParts("<style>" + Html.Raw(offer.CustomStyle) + "</style>");
+    }
+    Html.AppendInlineScriptParts(ResourceLocation.Footer, @"<script>
+function cssVar(name, value) {
+            if (name[0] != '-') name = '--' + name //allow passing with or without --
+            if (value) document.documentElement.style.setProperty(name, value)
+            return getComputedStyle(document.documentElement).getPropertyValue(name);
+        }
+cssVar('primary-color', '"+ offer.PrimaryColor + @"');
+cssVar('background-color', '" + offer.BackgroundColor + @"');
+cssVar('priceButtonBorderColor', '" + offer.PriceButtonBorderColor + @"');
+cssVar('counterBoxBackground', '" + offer.BackgroundNumberBox + @"');
+cssVar('counterWordsOldPriceColor', '" + offer.CounterWordsOldPriceColor + @"');
+cssVar('counterNumbersColor', '" + offer.CounterNumbersColor + @"');
+</script>");
+
+
+<div id="@string.Format("{0}Container",carouselName)">
+    @if (offer.ShowName)
+    {
+    <h2 id="DTitle-@randomId" class="DTitle text-center g-color-black mb-4">@offer.Name</h2>
+    }
+    <div id="dailyOffer-@randomId" class="js-carousel" data-slick='{"autoplay": @offer.AutoPlay.ToString().ToLower(), "autoplaySpeed": @offer.AutoPlaySpeed,"pauseOnHover":@offer.PauseOnHover.ToString().ToLower(),"infinite":true,"rtl":@workContext.WorkingLanguage.Rtl.ToString().ToLower()}' data-arrows-classes="@offer.ButtonClasses"
+         data-arrow-left-classes="@(workContext.WorkingLanguage.Rtl==true?"fa fa-angle-left g-right-0":"fa fa-angle-left g-left-0")" data-arrow-right-classes="@(workContext.WorkingLanguage.Rtl==true?"fa fa-angle-right g-left-0":"fa fa-angle-right g-right-0")">
+
+        @foreach (var product in offer.productPresentationModels)
+        {
+            counter += 1;
+            <div id="Djs-slide-@randomId-@counter" class="Djs-slide js-slide">
+                <!-- Promo Block -->
+                <section id="DSection-@randomId-@counter" class="DSection g-bg-secondary g-pos-rel">
+                    <div id="DContainer-@randomId-@counter" class="DContainer container ">
+                        <div id="DContent-@randomId-@counter" class="DContent row justify-content-between align-items-center">
+                            <div id="Dorder-@randomId-@counter" class="Dorder col-md-6 col-lg-6 order-md-2 g-mb-30">
+                                <div id="DPos-@randomId-@counter" class="DPos g-pos-rel">
+                                    <img id="DImg-@randomId-@counter" class="DImg img-fluid w-100" alt="@product.DefaultPictureModel.AlternateText" src="@product.DefaultPictureModel.ImageUrl" title="@product.DefaultPictureModel.Title">
+                                    @{
+                                        string classTransform = "";
+                                    }
+                                    @if (product.ProductType != ProductType.GroupedProduct && (product.OldPriceValue != 0 || product.PriceBeforDiscountValue != product.ProductPrice.PriceValue))
+                                    {
+
+                                        classTransform = "transform:translateY(-100%)";
+                                    }
+                                    <span id="DSpanCirclePrice-@randomId-@counter" class="DSpanCirclePrice u-icon-v1 g-width-125 g-height-125  g-color-white g-bg-primary g-font-weight-300 g-font-size-18 rounded-circle g-pos-abs g-top-100 g-left-0 g-brd-around">
+                                        <i id="DIPrice-@randomId-@counter" style="@(classTransform!=""?classTransform:"")" class="g-font-style-normal">
+                                            @product.ProductPrice.Price
+                                        </i>
+                                        @if (product.ProductType != ProductType.GroupedProduct && product.OldPriceValue != 0)
+                                        {
+                                            <i id="DIOldPrice-@randomId-@counter" style="@(classTransform!=""?classTransform:"")" class="offer-old-price">@product.OldPrice</i>
+                                        }
+                                        @if (product.ProductType != ProductType.GroupedProduct && product.PriceBeforDiscountValue != product.ProductPrice.PriceValue)
+                                        {
+                                            <i id="DIPriceBeforeDiscount-@randomId-@counter" style="@(classTransform!=""?classTransform:"")" class="offer-old-price2">@product.PriceBeforDiscount</i>
+                                        }
+                                    </span>
+
+                                </div>
+                            </div>
+                            <div id="DDetails-@randomId-@counter" class="DDetails col-md-6 order-md-1 g-mb-30">
+                                <div id="DdivDetails-@randomId-@counter" class="DdivDetails g-mb-30 padding-20">
+                                    <h1 id="DCategoryName-@randomId-@counter" class="DCategoryName g-color-primary g-font-weight-400 g-font-size-40 mb-0">@product.Category.Name</h1>
+                                    <h2 id="DProductName-@randomId-@counter" class="DProductName g-line-height-2 mb-4">@product.Name</h2>
+                                    <p id="DShortDesc-@randomId-@counter" class="DShortDesc g-line-height-1-5">@product.ShortDescription</p>
+                                </div>
+                                <div class="text-center g-mb-30">
+                                    <a id="DBtnShop-@randomId-@counter" class="DBtnShop btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25 " href="@Url.RouteUrl("Product", new { SeName = product.SeName })">@T("Plugins.Widgets.DailyOffers.ShopNow")</a>
+
+                                </div>
+                                <!-- Countdown -->
+                                @if (product.PriceBeforDiscountValue != product.ProductPrice.PriceValue && product.EndDateDiscount != null && product.EndDateDiscount > DateTime.UtcNow && product.EndDateDiscount != DateTime.MaxValue)
+                                {
+                                    var finalEndDate = product.EndDateDiscount.Value.ToLocalTime().ToString("MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                    <div class="text-center">
+
+                                        <div id="DCountDContainer-@randomId-@counter" class="DCountDContainer text-uppercase">
+                                            <div id="DCountDown-@randomId-@counter" class="js-countdown u-countdown-v3 g-line-height-1_3 g-color-black"
+                                                 data-end-date="@finalEndDate"
+                                                 data-month-format="%m"
+                                                 data-days-format="%D"
+                                                 data-hours-format="%H"
+                                                 data-minutes-format="%M"
+                                                 data-seconds-format="%S">
+
+                                                <div id="DDaysContainer-@randomId-@counter" class="DDaysContainer d-inline-block g-min-width-10 rounded g-bg-opacity g-py-5 g-px-16 g-mx-1 g-mb-30">
+                                                    <div id="DDaysBox-@randomId-@counter" class="DDaysBox js-cd-days g-color-lightred g-font-weight-500 g-font-size-40"></div>
+                                                    <span id="DDaysName-@randomId-@counter" class="DDaysName g-color-gray-dark-v4 g-font-size-11">@T("Plugins.Widgets.DailyOffers.Days")</span>
+                                                </div>
+                                                <div id="DHoursContainer-@randomId-@counter" class="DHoursContainer d-inline-block g-min-width-10 rounded g-bg-opacity g-py-5 g-px-16 g-mx-1 g-mb-30">
+                                                    <div id="DHoursBox-@randomId-@counter" class="DHoursBox js-cd-hours g-color-lightred g-font-weight-500 g-font-size-40"></div>
+                                                    <span id="DHoursName-@randomId-@counter" class="DHoursName g-color-gray-dark-v4 g-font-size-11">@T("Plugins.Widgets.DailyOffers.Hours")</span>
+                                                </div>
+                                                <div id="DMinutesContainer-@randomId-@counter" class="DMinutesContainer d-inline-block g-min-width-10 rounded g-bg-opacity g-py-5 g-px-16 g-mx-1 g-mb-30">
+                                                    <div id="DMinutesBox-@randomId-@counter" class="DMinutesBox js-cd-minutes g-color-lightred g-font-weight-500 g-font-size-40"></div>
+                                                    <span id="DMinutesName-@randomId-@counter" class="DMinutesName g-color-gray-dark-v4 g-font-size-11">@T("Plugins.Widgets.DailyOffers.Minutes")</span>
+                                                </div>
+                                                @if (!offer.HideSeconds)
+                                                {
+                                                    <div id="DSecondsContainer-@randomId-@counter" class="DSecondsContainer d-inline-block g-min-width-10 rounded g-bg-opacity g-py-5 g-px-16 g-mx-1 g-mb-30">
+                                                        <div id="DSecondsBox-@randomId-@counter" class="js-cd-seconds g-color-lightred g-font-weight-500 g-font-size-40"></div>
+                                                        <span id="DSecondsName-@randomId-@counter" class="DSecondsName g-color-gray-dark-v4 g-font-size-11">@T("Plugins.Widgets.DailyOffers.Seconds")</span>
+                                                    </div>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- End Countdown -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Promo Block -->
+            </div>
+        }
+    </div>
+</div>
+}
+
+<!-- End Testimonials Advanced -->

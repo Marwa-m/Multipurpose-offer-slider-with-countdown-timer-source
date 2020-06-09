@@ -1,0 +1,10 @@
+﻿@model TimeSpan?
+<input id="@Html.IdForModel()" name="@Html.NameForModel()" value="@(Model > TimeSpan.MinValue || Model.HasValue ? Model : TimeSpan.Zero)" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#@Html.IdForModel()").kendoTimePicker({
+            format: "HH:mm",
+        }
+        );
+    });
+</script>

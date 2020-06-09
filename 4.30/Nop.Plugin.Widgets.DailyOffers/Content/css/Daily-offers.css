@@ -1,0 +1,520 @@
+﻿.js-carousel img {
+    vertical-align: middle;
+    border-style: none;
+}
+.js-carousel .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.js-carousel .col, .js-carousel .col-1, .js-carousel .col-10, .js-carousel .col-11, .js-carousel .col-12, .js-carousel .col-2, .js-carousel .col-3, .js-carousel .col-4, .js-carousel .col-5, .js-carousel .col-6, .js-carousel .col-7, .js-carousel .col-8, .js-carousel .col-9, .js-carousel .col-auto, .js-carousel .col-lg, .js-carousel .col-lg-1, .js-carousel .col-lg-10, .js-carousel .col-lg-11, .js-carousel .col-lg-12, .js-carousel .col-lg-2, .js-carousel .col-lg-3, .js-carousel .col-lg-4, .js-carousel .col-lg-5, .js-carousel .col-lg-6, .js-carousel .col-lg-7, .js-carousel .col-lg-8, .js-carousel .col-lg-9, .js-carousel .col-lg-auto, .js-carousel .col-md, .js-carousel .col-md-1, .js-carousel .col-md-10, .js-carousel .col-md-11, .js-carousel .col-md-12, .js-carousel .col-md-2, .js-carousel .col-md-3, .js-carousel .col-md-4, .js-carousel .col-md-5, .js-carousel .col-md-6, .js-carousel .col-md-7, .js-carousel .col-md-8, .js-carousel .col-md-9, .js-carousel .col-md-auto, .js-carousel .col-sm, .js-carousel .col-sm-1, .js-carousel .col-sm-10, .js-carousel .col-sm-11, .js-carousel .col-sm-12, .js-carousel .col-sm-2, .js-carousel .col-sm-3, .js-carousel .col-sm-4, .js-carousel .col-sm-5, .js-carousel .col-sm-6, .js-carousel .col-sm-7, .js-carousel .col-sm-8, .js-carousel .col-sm-9, .js-carousel .col-sm-auto, .js-carousel .col-xl, .js-carousel .col-xl-1, .js-carousel .col-xl-10, .js-carousel .col-xl-11, .js-carousel .col-xl-12, .js-carousel .col-xl-2, .js-carousel .col-xl-3, .js-carousel .col-xl-4, .js-carousel .col-xl-5, .js-carousel .col-xl-6, .js-carousel .col-xl-7, .js-carousel .col-xl-8, .js-carousel .col-xl-9, .js-carousel .col-xl-auto {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (min-width:768px) {
+    .js-carousel .col-md-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .js-carousel .order-md-1 {
+        -ms-flex-order: 1;
+        order: 1;
+    }
+
+    .js-carousel .order-md-2 {
+        -ms-flex-order: 2;
+        order: 2;
+    }
+}
+
+@media (min-width:992px) {
+    .js-carousel .col-lg-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+.js-carousel .btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+@media screen and (prefers-reduced-motion:reduce) {
+    .js-carousel .btn {
+        transition: none;
+    }
+}
+
+.js-carousel .btn:focus, .js-carousel .btn:hover {
+    text-decoration: none;
+}
+
+.js-carousel .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+}
+
+.js-carousel .btn:disabled {
+    opacity: .65;
+}
+
+.js-carousel .btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.js-carousel .rounded {
+    border-radius: .25rem !important;
+}
+
+.js-carousel .rounded-circle {
+    border-radius: 50% !important;
+}
+
+.js-carousel .d-inline-block {
+    display: inline-block !important;
+}
+
+.js-carousel .justify-content-between {
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+}
+
+.js-carousel .align-items-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+}
+
+.js-carousel .w-100 {
+    width: 100% !important;
+}
+
+.js-carousel .mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.js-carousel .mb-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+.js-carousel .text-uppercase {
+    text-transform: uppercase !important;
+}
+
+@media print {
+    *, ::after, ::before {
+        text-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    .js-carousel img {
+        page-break-inside: avoid;
+    }
+
+    .js-carousel h2, p {
+        orphans: 3;
+        widows: 3;
+    }
+
+    .js-carousel h2 {
+        page-break-after: avoid;
+    }
+
+    .js-carousel .container {
+        min-width: 992px !important;
+    }
+}
+/*! CSS Used from: http://localhost:15537/Plugins/Widgets.DailyOffers/Content/slick/slick.css */
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+    .slick-list:focus {
+        outline: none;
+    }
+
+.slick-slider .slick-track, .slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .slick-track:before, .slick-track:after {
+        display: table;
+        content: '';
+    }
+
+    .slick-track:after {
+        clear: both;
+    }
+
+.slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+
+    .slick-slide img {
+        display: block;
+    }
+
+.slick-initialized .slick-slide {
+    display: block;
+}
+
+/*! CSS Used from: ../fontAwesome/css/font-awesome.min.css */
+.js-carousel .fa {
+    display: inline-block;
+}
+
+.js-carousel .fa {
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.js-carousel .fa-angle-left:before {
+    content: "\f104";
+}
+
+.js-carousel .fa-angle-right:before {
+    content: "\f105";
+}
+
+
+.js-carousel .u-arrow-v1::before {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    vertical-align: top;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.js-carousel .u-arrow-v1[class*="abs"]::before {
+    position: absolute;
+}
+
+.js-carousel .btn {
+    position: relative;
+    -webkit-transition: .2s ease;
+    -o-transition: .2s ease;
+    transition: .2s ease;
+    cursor: pointer;
+}
+
+    .js-carousel .btn:focus, .btn:active:focus {
+        outline: 0 none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+
+.js-carousel .u-icon-v1 {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+    .js-carousel .u-icon-v1:hover {
+        text-decoration: none;
+    }
+
+    .js-carousel .u-icon-v1::before {
+        display: block;
+    }
+
+    .js-carousel .u-icon-v1 > i {
+        position: relative;
+        top: 50%;
+        display: block;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        z-index: 2;
+    }
+
+.slick-slide:focus {
+    outline: 0 none;
+}
+
+.js-carousel {
+    background: url(../preloader-black.svg) no-repeat 50% 50%;
+}
+
+    .js-carousel .js-next, .js-carousel .js-prev {
+        opacity: 0;
+    }
+
+    .js-carousel.slick-initialized {
+        background: none;
+    }
+
+        .js-carousel.slick-initialized .js-slide {
+            visibility: visible;
+            height: auto;
+            overflow: visible;
+        }
+
+        .js-carousel.slick-initialized .js-next, .js-carousel.slick-initialized .js-prev {
+            opacity: 1;
+        }
+
+.js-slide {
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+    .js-slide:first-child {
+        height: auto;
+    }
+
+.js-carousel .js-next, .js-carousel .js-prev {
+    cursor: pointer;
+}
+
+.js-carousel .js-next, .js-carousel .js-prev {
+    z-index: 10;
+}
+
+
+
+
+
+.js-carousel .g-brd-style-solid {
+    border-style: solid !important;
+}
+
+
+
+.js-carousel .g-brd-3 {
+    border-width: 3px !important;
+}
+
+
+.g-font-size-11 {
+    font-size: 0.78571rem !important;
+}
+
+.g-font-size-12 {
+    font-size: 0.85714rem !important;
+}
+
+.g-font-size-18 {
+    font-size: 1.28571rem !important;
+}
+
+.g-font-size-40 {
+    font-size: 2.85714rem !important;
+}
+
+.g-font-size-75 {
+    font-size: 5.35714rem !important;
+}
+
+.g-font-weight-300 {
+    font-weight: 300 !important;
+}
+
+.g-font-weight-400 {
+    font-weight: 400 !important;
+}
+
+.g-font-weight-500 {
+    font-weight: 500 !important;
+}
+
+.g-line-height-1_3 {
+    line-height: 1.3 !important;
+}
+
+.g-font-style-normal {
+    font-style: normal;
+}
+
+.g-pos-rel {
+    position: relative !important;
+}
+
+.g-pos-abs {
+    position: absolute !important;
+}
+
+.g-top-100 {
+    top: 7.14286rem;
+}
+
+.g-left-0 {
+    left: 0;
+}
+
+.g-right-0 {
+    right: 0 !important;
+}
+
+.g-absolute-centered--y {
+    position: absolute !important;
+    top: 50% !important;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -webkit-backface-visibility: hidden;
+}
+
+
+
+.g-width-50 {
+    width: 50px !important;
+}
+
+.g-width-125 {
+    width: 125px !important;
+}
+
+.g-height-50 {
+    height: 50px;
+}
+
+.g-height-125 {
+    height: 125px;
+}
+
+@media (min-width: 0) {
+    .g-mx-1 {
+        margin-left: 0.07143rem !important;
+        margin-right: 0.07143rem !important;
+    }
+
+    .g-mt-minus-25 {
+        margin-top: -1.78571rem !important;
+    }
+
+    .g-mb-30 {
+        margin-bottom: 2.14286rem !important;
+    }
+}
+
+.g-mt-minus-25 {
+    margin-top: -1.78571rem;
+}
+
+@media (min-width: 0) {
+    .g-px-16 {
+        padding-left: 1.14286rem !important;
+        padding-right: 1.14286rem !important;
+    }
+
+    .g-px-25 {
+        padding-left: 1.78571rem !important;
+        padding-right: 1.78571rem !important;
+    }
+
+    .g-py-5 {
+        padding-top: 0.35714rem !important;
+        padding-bottom: 0.35714rem !important;
+    }
+
+    .g-py-12 {
+        padding-top: 0.85714rem !important;
+        padding-bottom: 0.85714rem !important;
+    }
+}
+
+/*! CSS Used fontfaces */
+@font-face {
+    font-family: FontAwesome;
+    src: url(../fontAwesome/fonts/fontawesome-webfont.eot?v=4.7.0);
+    src: url(../fontAwesome/fonts/fontawesome-webfont.eot#iefix&v=4.7.0) format('embedded-opentype'),url(../fontAwesome/fonts/fontawesome-webfont.woff2?v=4.7.0) format('woff2'),url(../fontAwesome/fonts/fontawesome-webfont.woff?v=4.7.0) format('woff'),url(../fontAwesome/fonts/fontawesome-webfont.ttf?v=4.7.0) format('truetype'),url(../fontAwesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular) format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.js-carousel .text-center {
+    text-align: center !important;
+}
+
+.offer-old-price {
+    margin: 0 5px 0 0;
+    font-size: 16px;
+    text-decoration: line-through;
+}
+
+.offer-old-price2 {
+    margin: 0 5px 0 0;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+
+.g-line-height-2 {
+    line-height: 2;
+}
+
+.g-line-height-1-5 {
+    line-height: 1.5;
+}
+
+.padding-20 {
+    padding: 20px
+}

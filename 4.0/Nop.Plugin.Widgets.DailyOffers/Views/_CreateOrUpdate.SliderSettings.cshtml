@@ -1,0 +1,46 @@
+﻿@model OfferModel
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="AutoPlay" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="AutoPlay" />
+                    <span asp-validation-for="AutoPlaySpeed"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="AutoPlaySpeed" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="AutoPlaySpeed" />
+                    <span asp-validation-for="AutoPlaySpeed"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="PauseOnHover" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="PauseOnHover" />
+                    <span asp-validation-for="PauseOnHover"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="ButtonClasses" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="ButtonClasses" />
+                    <span asp-validation-for="ButtonClasses"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

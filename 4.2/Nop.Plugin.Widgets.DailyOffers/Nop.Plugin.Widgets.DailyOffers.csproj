@@ -1,0 +1,152 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+   <TargetFramework>netcoreapp2.2</TargetFramework>
+ </PropertyGroup>  
+ <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+   <OutputPath>..\..\Presentation\Nop.Web\Plugins\Widgets.DailyOffers</OutputPath>
+   <OutDir>$(OutputPath)</OutDir>
+ </PropertyGroup>
+ <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+   <OutputPath>..\..\Presentation\Nop.Web\Plugins\Widgets.DailyOffers</OutputPath>
+   <OutDir>$(OutputPath)</OutDir>
+ </PropertyGroup>
+ <!-- This target execute after "Build" target -->
+ <Target Name="NopTarget" AfterTargets="Build">
+   <!-- Delete unnecessary libraries from plugins path -->
+   <MSBuild Projects="$(MSBuildProjectDirectory)\..\..\Build\ClearPluginAssemblies.proj" Properties="PluginPath=$(MSBuildProjectDirectory)\$(OutDir)" Targets="NopClear" />
+ </Target>
+ <ItemGroup>
+   <None Remove="Content\countdown\hs.countdown.js" />
+   <None Remove="Content\countdown\jquery.countdown.min.js" />
+   <None Remove="Content\css\Daily-offers.css" />
+   <None Remove="Content\css\Daily-offers.rtl.css" />
+   <None Remove="Content\fontAwesome\fonts\fontawesome-webfont.eot" />
+   <None Remove="Content\fontAwesome\fonts\fontawesome-webfont.svg" />
+   <None Remove="Content\fontAwesome\fonts\fontawesome-webfont.ttf" />
+   <None Remove="Content\fontAwesome\fonts\fontawesome-webfont.woff" />
+   <None Remove="Content\fontAwesome\fonts\fontawesome-webfont.woff2" />
+   <None Remove="Content\fontAwesome\fonts\FontAwesome.otf" />
+   <None Remove="Content\preloader-black.svg" />
+   <None Remove="Content\slick\hs.carousel.js" />
+   <None Remove="Content\slick\hs.core.js" />
+   <None Remove="Content\slick\slick.js" />
+   <None Remove="logo.png" />
+   <None Remove="plugin.json" />
+   <None Remove="Views\Create.cshtml" />
+   <None Remove="Views\Edit.cshtml" />
+   <None Remove="Views\List.cshtml" />
+   <None Remove="Views\ProductAddPopup.cshtml" />
+   <None Remove="Views\PublicInfo.cshtml" />
+   <None Remove="Views\WidgetZoneAddPopup.cshtml" />
+   <None Remove="Views\_CreateOrUpdate.cshtml" />
+   <None Remove="Views\_CreateOrUpdate.CustomStyle.cshtml" />
+   <None Remove="Views\_CreateOrUpdate.Info.cshtml" />
+   <None Remove="Views\_CreateOrUpdate.Products.cshtml" />
+   <None Remove="Views\_CreateOrUpdate.Scheduling.cshtml" />
+   <None Remove="Views\_CreateOrUpdate.SliderSettings.cshtml" />
+   <None Remove="Views\_CreateOrUpdate.WidgetZones.cshtml" />
+   <None Remove="Views\_ViewImports.cshtml" />
+ </ItemGroup>
+ <ItemGroup>
+   <Content Include="Content\countdown\hs.countdown.js">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\countdown\jquery.countdown.min.js">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\css\Daily-offers.css">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\css\Daily-offers.rtl.css">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\fontAwesome\fonts\fontawesome-webfont.eot">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\fontAwesome\fonts\fontawesome-webfont.svg">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\fontAwesome\fonts\fontawesome-webfont.ttf">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\fontAwesome\fonts\fontawesome-webfont.woff">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\fontAwesome\fonts\fontawesome-webfont.woff2">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\fontAwesome\fonts\FontAwesome.otf">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\preloader-black.svg">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\slick\hs.carousel.js">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\slick\hs.core.js">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Content\slick\slick.js">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="logo.png">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="plugin.json">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\Create.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\Edit.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\List.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\ProductAddPopup.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\PublicInfo.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\WidgetZoneAddPopup.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\_CreateOrUpdate.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\_CreateOrUpdate.CustomStyle.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\_CreateOrUpdate.Info.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\_CreateOrUpdate.Products.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\_CreateOrUpdate.Scheduling.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\_CreateOrUpdate.SliderSettings.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\_CreateOrUpdate.WidgetZones.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\_ViewImports.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+ </ItemGroup>
+ <ItemGroup>
+   <ProjectReference Include="..\..\Libraries\Nop.Core\Nop.Core.csproj" />
+   <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
+   <ProjectReference Include="..\..\Presentation\Nop.Web\Nop.Web.csproj" />
+ </ItemGroup>
+ <ItemGroup>
+   <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures">
+     <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.viewfeatures\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll</HintPath>
+   </Reference>
+ </ItemGroup>
+</Project>

@@ -1,0 +1,34 @@
+﻿@model OfferModel
+@{
+    //page title
+    ViewBag.Title = T("Plugins.Widgets.DailyOffers.Offer.AddNew").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("DailyOffers");
+    Layout = "_AdminLayout";
+
+}
+
+<form asp-controller="Offer" asp-action="Create" method="post" id="offer-form">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Plugins.Widgets.DailyOffers.Offer.AddNew")
+            <small>
+                <i class="fa fa-arrow-circle-left"></i>
+                <a asp-action="List">@T("Plugins.Widgets.DailyOffers.Offer.BackToList")</a>
+            </small>
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+            <button type="submit" name="save-continue" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+            @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_offer_details_buttons" })
+        </div>
+    </div>
+
+    @await Html.PartialAsync("~/Plugins/Widgets.DailyOffers/Views/_CreateOrUpdate.cshtml", Model)
+</form>

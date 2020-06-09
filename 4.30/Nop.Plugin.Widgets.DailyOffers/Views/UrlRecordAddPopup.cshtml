@@ -1,0 +1,125 @@
+﻿@model OfferModel.AddOfferUrlRecordModel
+@inject AdminAreaSettings adminAreaSettings
+
+@{
+    Layout = "_AdminPopupLayout";
+
+    //page title
+    ViewBag.Title = T("Plugins.Widgets.DailyOffers.UrlRecord.AddNew").Text;
+}
+@if (ViewBag.RefreshPage == true)
+{
+    <script type="text/javascript">
+        try {
+            window.opener.document.getElementById('@(Context.Request.Query["btnId"])').click();
+        }
+        catch (e) { }
+        window.close();
+    </script>
+}
+<form asp-controller="Offer" asp-action="UrlRecordAddPopup"
+      asp-route-OfferId="@Context.Request.Query["OfferId"]"
+      asp-route-btnId="@Context.Request.Query["btnId"]"
+      asp-route-formId="@Context.Request.Query["formId"]">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Admin.System.SeNames")
+        </h1>
+        <div class="pull-right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default panel-search panel-popup">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="search-text">@T("Admin.Common.Search")</div>
+                        </div>
+
+                        <div class="search-body">
+                            <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-sm-2">
+                                            <nop-label asp-for="@Model.urlRecordSearchModel.SeName" />
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <nop-editor asp-for="@Model.urlRecordSearchModel.SeName" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <button type="button" id="search-senames" class="btn btn-primary btn-search"><i class="fa fa-search"></i>@T("Admin.Common.Search")</button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @await Html.PartialAsync("Table", new DataTablesModel
+    {
+        Name = "sename-grid",
+        UrlRead = new DataUrl("SeNames", "Offer", null),
+        SearchButtonId = "search-senames",
+        Length = Model.urlRecordSearchModel.PageSize,
+        LengthMenu = Model.urlRecordSearchModel.AvailablePageSizes,
+        Filters = new List<FilterParameter>
+        {
+            new FilterParameter(nameof(OfferModel.AddOfferUrlRecordModel.urlRecordSearchModel.SeName),nameof(Model.urlRecordSearchModel)),
+        },
+        ColumnCollection = new List<ColumnProperty>
+        {
+            new ColumnProperty(nameof(UrlRecordModel.Id))
+            {
+                IsMasterCheckBox = true,
+                Render = new RenderCheckBox(nameof(OfferModel.AddOfferUrlRecordModel.SelectedUrlRecordsIds)),
+                ClassName = NopColumnClassDefaults.CenterAll,
+                Width = "50"
+            },
+            new ColumnProperty(nameof(UrlRecordModel.Id))
+            {
+                Title = T("Admin.System.SeNames.Id").Text,
+                ClassName = NopColumnClassDefaults.CenterAll,
+                Width = "50"
+            },
+            new ColumnProperty(nameof(UrlRecordModel.Name))
+            {
+                Title = T("Admin.System.SeNames.Name").Text
+            },
+           
+            new ColumnProperty(nameof(UrlRecordModel.EntityName))
+            {
+                Title = T("Admin.System.SeNames.EntityName").Text,
+                Width = "100"
+            },
+            new ColumnProperty(nameof(UrlRecordModel.IsActive))
+            {
+                Title = T("Admin.System.SeNames.IsActive").Text,
+                Width = "80",
+                ClassName = NopColumnClassDefaults.CenterAll,
+                Render = new RenderBoolean()
+            },
+            new ColumnProperty(nameof(UrlRecordModel.Language))
+            {
+                Title = T("Admin.System.SeNames.Language").Text,
+                Width = "100"
+            }
+        }
+    })
+
+                    </div>
+                    <div class="panel-footer">
+                        <button type="submit" name="save" class="btn bg-blue">
+                            <i class="fa fa-floppy-o"></i>
+                            @T("Admin.Common.Save")
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
